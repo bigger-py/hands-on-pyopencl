@@ -6,3 +6,5 @@ if __name__=="__main__":
     
     if exercise == 1:
         import exercises.e1_platform_information
+    elif exercise == 2:
+        import exercises.e2_vector_addition
