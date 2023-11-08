@@ -2,7 +2,7 @@
 Hacky way to fix relative imports...
 """
 if __name__=="__main__":
-    exercise: int = 3
+    exercise: int = 4
     
     if exercise == 1:
         import exercises.e1_platform_information
@@ -10,3 +10,5 @@ if __name__=="__main__":
         import exercises.e2_vector_addition
     elif exercise == 3:
         import exercises.e3_simple_api
+    elif exercise == 4:
+        import exercises.e4_chained_vector_addition
