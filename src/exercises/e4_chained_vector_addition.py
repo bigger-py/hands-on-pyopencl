@@ -21,7 +21,7 @@ command_queue: cl.CommandQueue = cl.CommandQueue(context)
 
 # Define a simple kernel function to add two vectors.
 VECTOR_ADDITION = """
-__kernel void vec_add_verbose(__global const float *a, __global const float *b, __global float *c)
+__kernel void vec_add(__global const float *a, __global const float *b, __global float *c)
 {
     // Add together two vectors.
     int i = get_global_id(0);
@@ -48,7 +48,7 @@ local_size = (32,)
 mf = cl.mem_flags
 
 program = cl.Program(context, VECTOR_ADDITION).build()
-vec_add: cl.Kernel = program.vec_add_verbose
+vec_add: cl.Kernel = program.vec_add
 
 # Define the same-sized buffers on the device (d_).
 # NOTE this copies host the various arrays to the compute device.
