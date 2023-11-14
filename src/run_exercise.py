@@ -17,4 +17,4 @@ if __name__=="__main__":
     elif exercise == 6:
         import exercises.e6_simple_matmul
     elif exercise == 7:
-        import exercises.e7_matmul_optimization
+        import exercises.e7_matmul_optimization_pt1

@@ -1,11 +1,7 @@
 """
-This code does matrix multiplication by taking the dot product of the
-ith row and the jth column of two matrices.
-
-We will be solving the problem:
-Find C === A @ B where @ indicates a matrix multiplication.
-We will assume tha the matrices are correctly formed (or 
-at least let the host validate that.)
+This code extends Exercise 6 and looks at optimization of the matrix
+multiplication problem by reconstructing the problem to make more
+efficient memory accesses.
 """
 import time
 
@@ -142,16 +138,16 @@ print("")
 # Let's adjust the kernell so that we don't keep repeating the same
 # memory accesses over and over again.
 with open("src/kernels/e7/matmul_wi_row_private.cl", "r") as kernel_file:
-    one_d_source = kernel_file.read()
+    one_d_private_source = kernel_file.read()
 
 global_size = (M,)
 local_size = (32,)
-program = cl.Program(context, one_d_source).build()
+program = cl.Program(context, one_d_private_source).build()
 mat_mul: cl.Kernel = program.mat_mul
 mat_mul.set_scalar_arg_dtypes([np.int32, np.int32, None, None, None])
 args = (N, O, d_L, d_R, d_T)
 
-print("Results for  matrix multiplication (one work-item per row, 'private' memory):")
+print("Results for matrix multiplication (one work-item per row, 'private' memory):")
 test_and_report(global_size, local_size)
 
 # NOTE For some reason, the device performance actually seems to be
