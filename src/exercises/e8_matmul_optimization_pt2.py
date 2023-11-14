@@ -132,3 +132,26 @@ args = (N, O, d_L, d_R, d_R_col, d_T)
 
 print("Results for matrix multiplication (one work-item per row in 'private' memory, work group sharing R column):")
 test_and_report(global_size, local_size)
+
+# Now run the optimal "blocked" approach written by someone 
+# with much more experience than me!
+with open("src/kernels/e8/matmul_blocked.cl", "r") as kernel_file:
+    blocked_source = kernel_file.read()
+
+global_size = (M,O)
+local_size = (16,16)
+program = cl.Program(context, blocked_source).build()
+mat_mul: cl.Kernel = program.mmul
+mat_mul.set_scalar_arg_dtypes([np.int32, None, None, None, None, None])
+
+# Work-group computes a block of C. This size is also set
+# in a #define inside the kernel function. Note this blocksize
+# must evenly divide the matrix order
+blocksize = 16
+
+A_block = cl.LocalMemory(np.dtype(np.float32).itemsize * blocksize * blocksize)
+B_block = cl.LocalMemory(np.dtype(np.float32).itemsize * blocksize * blocksize)
+args = (N, d_L, d_R, d_T, A_block, B_block)
+
+print("Results for blocked matrix multiplication:")
+test_and_report(global_size, local_size)
