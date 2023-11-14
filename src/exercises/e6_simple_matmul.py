@@ -44,7 +44,7 @@ __kernel void mat_mul(const int sharedSize, __global const float *left, __global
     out[j + i*rightWidth] = sum;
 }
 """
-N = 2048
+N = 1024
 # Define the host (h_) arrays we want to add together.
 h_left = np.random.random((N,N)).astype(np.float32)
 h_right = np.random.random((N,N)).astype(np.float32)

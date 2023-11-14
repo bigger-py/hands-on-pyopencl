@@ -2,7 +2,7 @@
 Hacky way to fix relative imports...
 """
 if __name__=="__main__":
-    exercise: int = 6
+    exercise: int = 7
     
     if exercise == 1:
         import exercises.e1_platform_information
@@ -16,3 +16,5 @@ if __name__=="__main__":
         import exercises.e5_more_vector_addition
     elif exercise == 6:
         import exercises.e6_simple_matmul
+    elif exercise == 7:
+        import exercises.e7_matmul_optimization
