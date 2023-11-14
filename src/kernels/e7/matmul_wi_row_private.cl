@@ -5,7 +5,7 @@ __kernel void mat_mul(const int sharedSize, const int rightWidth, __global const
     // Find the indices in the final matrix that we want to calculate for.
     int i = get_global_id(0);
 
-    float left_memory[1024];
+    float left_memory[4096];
     // Store row into "private" memory for faster reuse.
     for (int k = 0; k < sharedSize; k++)
     {
@@ -13,7 +13,7 @@ __kernel void mat_mul(const int sharedSize, const int rightWidth, __global const
     }
 
     // For each column in the output matrix...
-    for (int j = 0; j < sharedSize; j++)
+    for (int j = 0; j < rightWidth; j++)
     {
         // Initialize a running sum.
         float sum = 0.0f;

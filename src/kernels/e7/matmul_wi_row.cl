@@ -6,7 +6,7 @@ __kernel void mat_mul(const int sharedSize, const int rightWidth, __global const
     int i = get_global_id(0);
 
     // For each column in the output matrix...
-    for (int j = 0; j < sharedSize; j++)
+    for (int j = 0; j < rightWidth; j++)
     {
         // Initialize a running sum.
         float sum = 0.0f;

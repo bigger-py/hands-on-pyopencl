@@ -13,7 +13,7 @@ import pyopencl as cl
 import numpy as np
 
 
-REPEATS = 10
+REPEATS = 3
 
 def test_and_report(global_size: tuple[int], local_size: tuple[int] | None, print_host=False):
 
@@ -155,7 +155,8 @@ print("Results for  matrix multiplication (one work-item per row, 'private' memo
 test_and_report(global_size, local_size)
 
 # NOTE For some reason, the device performance actually seems to be
-# best with the naive approach. Maybe the compiler is doing something
-# nice for us. Either way, everything seems to be slower than the
+# best with the naive approach when the problem size is 1024**3. 
+# Increasing the problem size along M or N solves this.
+# Either way, everything seems to be slower than the
 # numpy approach of L @ R, which is probably because it uses a much
 # more efficient algorithm.
