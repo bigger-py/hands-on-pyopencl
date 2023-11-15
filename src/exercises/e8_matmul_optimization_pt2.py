@@ -95,7 +95,7 @@ mat_mul.set_scalar_arg_dtypes([np.int32, np.int32, None, None, None])
 args = (N, O, d_L, d_R, d_T)
 
 print("Results for matrix multiplication (one work-item per row, 'private' memory):")
-test_and_report(global_size, local_size)
+test_and_report(global_size, local_size, print_host=True)
 
 # Notice that in Exercise 7, we gained some efficiency by using the
 # fact that each work item repeatedly tries to access the same
