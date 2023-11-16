@@ -97,3 +97,9 @@ args = (N, M, d_work_group_memory, d_pi_to_sum)
 
 print("Results for finding pi (simplest approach):")
 test_and_report(global_size, local_size)
+
+# We could in principle implement a further on-device reduction but
+# we would have to launch another kernel to reduce those values. We
+# could probably also perform more complex reduction whereby the 
+# work-group summation is done in parallel iteratively until only
+# one value is left.
